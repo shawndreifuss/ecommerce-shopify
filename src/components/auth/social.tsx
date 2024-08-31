@@ -14,9 +14,6 @@ export const Social = () => {
       <Button size="lg" className="w-full" variant="outline" onClick={() => {}}>
         <FaApple className="h-5 w-5" />
       </Button>
-      <Button size="lg" className="w-full" variant="outline" onClick={() => {}}>
-        <RiAmazonLine className="h-5 w-5" />
-      </Button>
     </div>
   );
 };
