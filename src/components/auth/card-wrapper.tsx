@@ -29,13 +29,12 @@ export const CardWrapper = ({
     <Card className="w-[400px] shadow-md">
       <CardHeader>
         <Header label={headerLabel} />
+        <CardContent>{children}</CardContent>
         {showSocial && (
             <CardFooter>
                 <Social />
             </CardFooter>
         )}
-        <CardContent>{children}</CardContent>
-       
         <CardFooter>
           <BackButton
           label={backButtonLabel}
