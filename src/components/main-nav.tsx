@@ -1,4 +1,4 @@
-'use client'
+
 
 import Link from "next/link"
 import { CircleUser, Menu, Package2, Search } from "lucide-react"
@@ -16,18 +16,15 @@ import Image from "next/image"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { NavLinks } from "@/components/nav-links"
 import logo from '@/assets/images/logo.png'
-const MainNav = () => {
-  const user = {
-    name:'shawn'
-  }
+import SearchModal from "@/components/search-modal"
 
-  console.log(logo)
+const MainNav =  () => {
+
   return (
-    <div className="flex min-h-screen w-full flex-col">
-    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+    <header className="sticky top-0 flex h-20 items-center gap-4 border-b bg-background px-4 md:px-6">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
         <Link
-          href="#"
+          href="/"
           className="flex items-center gap-2 text-lg font-semibold md:text-base"
         >
        <Image src={logo} width={100} height={100} alt="Everything Home logo" />
@@ -50,58 +47,50 @@ const MainNav = () => {
           <SheetContent side="left">
             <nav className="grid gap-6 text-lg font-medium">
               <Link
-                href="#"
+                href="/"
                 className="flex items-center gap-2 text-lg font-semibold"
               >
                 <Package2 className="h-6 w-6" />
                 <span className="sr-only">Everything Home</span>
               </Link>
               <Link
-                href="#"
+                href="/"
                 className="text-muted-foreground hover:text-foreground"
               >
                 Home
               </Link>
               <Link
-                href="#"
+                href="/collections"
                 className="text-muted-foreground hover:text-foreground"
               >
                 Collections
               </Link>
               <Link
-                href="#"
+                href="/orders"
                 className="text-muted-foreground hover:text-foreground"
               >
                 Orders
               </Link>
               <Link
-                href="#"
+                href="/my-account"
                 className="text-muted-foreground hover:text-foreground"
               >
-                Profile
+                My Account
               </Link>
-              <Link href="#" className="hover:text-foreground">
+              <Link href="#/settings" className="hover:text-foreground">
                 Settings
               </Link>
             </nav>
           </SheetContent>
         </Sheet>
         <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-          <form className="ml-auto flex-1 sm:flex-initial">
-            <div className="relative">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search products..."
-                className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-              />
-            </div>
-          </form>
-          {user.name ==='shawn' ? (
-            <>
-            <Button className="bg-primary">Create account</Button>
-            </>
-          ): (
+        <SearchModal />
+
+
+
+            <Link href={'/login'}>
+            <Button className="bg-primary">Login</Button>
+            </Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
@@ -118,12 +107,8 @@ const MainNav = () => {
               <DropdownMenuItem>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          )}
         </div>
       </header>
-     
-    </div>
-
 
   )
 }
