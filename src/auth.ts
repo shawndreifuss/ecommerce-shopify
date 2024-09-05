@@ -6,19 +6,22 @@ import Credentials from "next-auth/providers/credentials";
 import { LoginSchema } from "@/schemas";
 import { getUserByEmail } from "./data/user";
 import bcrypt from "bcrypt";
-import Apple from "next-auth/providers/apple";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   callbacks: {
-    async session({session, token }) {
+    async session({ session, token }) {
       if (token.sub && session.user) {
         session.user.id = token.sub
       }
       return session
     },
-      async jwt({ token }) {
-        return token
+    async jwt({ token, user }) {
+      if (user) {
+        token.sub = user.id; // Add user ID to the token when signing in
+        token.email = user.email; // Optionally add other data
       }
+      return token;
+    },
   },
   adapter: PrismaAdapter(db),
   session: { strategy: "jwt" },
@@ -27,7 +30,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     Credentials({
       async authorize(credentials) {
         const validatedFields = LoginSchema.safeParse(credentials);
-
         if (!validatedFields.success) {
           console.error("Validation failed:", validatedFields.error);
           return null;
@@ -37,6 +39,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
         try {
           const user = await getUserByEmail(email);
+
 
           // If user is not found or doesn't have a password, return null
           if (!user || !user.password) {

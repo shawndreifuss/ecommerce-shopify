@@ -1,7 +1,7 @@
 
 
 import Link from "next/link"
-import { CircleUser, Menu, Package2, Search } from "lucide-react"
+import { CircleUser, Menu, Package2, } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -16,8 +16,12 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { NavLinks } from "@/components/nav-links"
 import logo from '@/assets/images/logo.png'
 import SearchModal from "@/components/search-modal"
+import { auth, signOut } from '@/auth'
 
-const MainNav =  () => {
+const MainNav = async () => {
+
+  const session = await auth()
+  const user = session?.user
 
   return (
     <header className="sticky top-0 flex h-20 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -76,7 +80,7 @@ const MainNav =  () => {
               >
                 My Account
               </Link>
-              <Link href="#/settings" className="hover:text-foreground">
+              <Link href="/settings" className="hover:text-foreground">
                 Settings
               </Link>
             </nav>
@@ -84,12 +88,16 @@ const MainNav =  () => {
         </Sheet>
         <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
         <SearchModal />
-
-
-
+{!user ? (
+  <>
             <Link href={'/login'}>
             <Button className="bg-primary">Login</Button>
             </Link>
+            <Link href={'/login'}>
+            <Button className="bg-primary">Sign Up</Button>
+            </Link>
+              </>
+            ) : (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
@@ -100,13 +108,20 @@ const MainNav =  () => {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
+              <DropdownMenuItem><Link href={'/settings'}>Settings</Link></DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuSeparator color="primary" />
+              <form action={async () => {
+        'use server';
+        await signOut()
+       }}>
+        <button className="flex w-full h-full justify-start p-2 align-center " type='submit'> <span>Sign Out</span></button>
+       </form>
             </DropdownMenuContent>
           </DropdownMenu>
+        )}  
         </div>
+      
       </header>
 
   )
