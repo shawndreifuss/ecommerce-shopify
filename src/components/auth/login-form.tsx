@@ -19,11 +19,13 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/ui/form-error";
 import { FormSuccess } from "@/components/ui/form-success";
 import { login } from "@/actions/login";
+import { useRouter } from 'next/navigation'; // Import useRouter from 'next/navigation'
 
 export const LoginForm = () => {
   const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string | undefined>("");
+  const [error, setError] = useState<string | undefined>(undefined);
+  const [success, setSuccess] = useState<string | undefined>(undefined);
+  const router = useRouter(); // Initialize router
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -36,12 +38,23 @@ export const LoginForm = () => {
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError('');
     setSuccess('');
-    
+
     startTransition(() => {
-      login(values).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
-      });
+      login(values)
+        .then((data) => {
+          console.log("Login response:", data);
+          if (data.error) {
+            setError(data.error);
+          } else if (data.success) {
+            setSuccess(data.success);
+            // Redirect to settings page
+            router.push(data.redirectTo); // Use router to navigate
+          }
+        })
+        .catch((error) => {
+          console.error("Error during login:", error);
+          setError("An unexpected error occurred.");
+        });
     });
   };
 

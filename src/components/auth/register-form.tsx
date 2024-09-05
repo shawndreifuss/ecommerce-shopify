@@ -19,11 +19,13 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/ui/form-error";
 import { FormSuccess } from "@/components/ui/form-success";
 import { register } from "@/actions/register";
+import { useRouter } from "next/navigation";
 
 export const RegisterForm = () => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -39,12 +41,23 @@ export const RegisterForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      register(values).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
-      });
+      register(values)
+        .then((data) => {
+          if (data.error) {
+            setError(data.error);
+          } else if (data.success) {
+            setSuccess(data.success);
+            // Perform the redirect after successful registration
+            router.push(data.redirectTo); // Redirect to the specified page
+          }
+        })
+        .catch((error) => {
+          console.error("Error during registration:", error);
+          setError("An unexpected error occurred.");
+        });
     });
   };
+
 
   return (
     <CardWrapper
