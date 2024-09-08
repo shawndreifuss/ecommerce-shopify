@@ -4,7 +4,6 @@ import * as React from "react";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
-import { Icons } from "@/components/ui/icons";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -15,7 +14,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { bundlesItems, getInspiredItems, sofaCollections } from "@/dummy-data/nav-data";
-import Image from "next/image";
+
 
 export function NavLinks2() {
   return (

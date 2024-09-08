@@ -7,6 +7,7 @@ const SiteLayout = ({ children }: { children: React.ReactNode }) => {
     <>
       <ScrollDetector />
       <MainNav />
+
       {children}
     </>
   );

@@ -16,7 +16,7 @@ const LayoutPage = async () => {
         <NewsletterSubscription />
         <InspoGallery />
         <Footer />
-
+ 
     </div>
   )
 }
