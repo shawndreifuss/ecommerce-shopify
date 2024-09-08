@@ -21,6 +21,7 @@ import {
     BreadcrumbSeparator,
   } from "@/components/ui/breadcrumb"
   import ProductCard from "@/components/product-card";
+import Filters from "./filters";
   
 
 function classNames(...classes: any) {
@@ -60,80 +61,22 @@ const FilterSidebar = () => {
               </div>
 
               {/* Filters */}
-              <form className="mt-4 border-t border-gray-200">
-                <h3 className="sr-only">Categories</h3>
-                <ul role="list" className="px-2 py-3 font-medium text-gray-900">
-                  {subCategories.map((category) => (
-                    <li key={category.name}>
-                      <a href={category.href} className="block px-2 py-3">
-                        {category.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-                {filters.map((section) => (
-                  <Disclosure
-                    key={section.id}
-                    as="div"
-                    className="border-t border-gray-200 px-4 py-6"
-                  >
-                    <h3 className="-mx-2 -my-3 flow-root">
-                      <DisclosureButton className="group flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
-                        <span className="font-medium text-gray-900">
-                          {section.name}
-                        </span>
-                        <span className="ml-6 flex items-center">
-                          <Plus
-                            aria-hidden="true"
-                            className="h-5 w-5 group-data-[open]:hidden"
-                          />
-                          <Minus
-                            aria-hidden="true"
-                            className="h-5 w-5 [.group:not([data-open])_&]:hidden"
-                          />
-                        </span>
-                      </DisclosureButton>
-                    </h3>
-                    <DisclosurePanel className="pt-6">
-                      <div className="space-y-6">
-                        {section.options.map((option, optionIdx) => (
-                          <div key={option.value} className="flex items-center">
-                            <input
-                              defaultValue={option.value}
-                              defaultChecked={option.checked}
-                              id={`filter-mobile-${section.id}-${optionIdx}`}
-                              name={`${section.id}[]`}
-                              type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                            />
-                            <label
-                              htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                              className="ml-3 min-w-0 flex-1 text-gray-500"
-                            >
-                              {option.label}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </DisclosurePanel>
-                  </Disclosure>
-                ))}
-              </form>
+             <Filters />
             </DialogPanel>
           </div>
         </Dialog>
 
-        <main className="mx-auto w-[95vw] px-4 sm:px-6 lg:px-8">
+        <main className="mx-auto w-screen px-4 sm:px-6 lg:px-12">
             <div className="pt-24 md:pt-20 lg:pt-16">
         <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Home</BreadcrumbLink>
-          <BreadcrumbSeparator />
-        </BreadcrumbItem>
+         
+        </BreadcrumbItem> <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbLink href="/shop">Shop</BreadcrumbLink>
-          <BreadcrumbSeparator />
-        </BreadcrumbItem>
+         
+        </BreadcrumbItem> <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbLink  href="/new-arrivals">
             New Arrivals
@@ -197,75 +140,19 @@ const FilterSidebar = () => {
             <h2 id="products-heading" className="sr-only">
               Products
             </h2>
-
-            <div className="grid grid-cols-1 gap-y-10 lg:grid-cols-5  ">
+<div className="w-full flex ">
+            
               {/* Filters */}
-              <form className="hidden lg:block w-fit">
+              <div className="hidden lg:block w-fit h-screen sticky top-24 ">
                 <h3 className="sr-only">Categories</h3>
-                <ul
-                  role="list"
-                  className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900 "
-                >
-                  {subCategories.map((category) => (
-                    <li key={category.name}>
-                      <a href={category.href}>{category.name}</a>
-                    </li>
-                  ))}
-                </ul>
-
-                {filters.map((section) => (
-                  <Disclosure
-                    key={section.id}
-                    as="div"
-                    className="border-b border-gray-200 py-6  w-40"
-                  >
-                    <h3 className="-my-3 flow-root">
-                      <DisclosureButton className="group flex w-40 items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                        <span className="font-medium text-gray-900">
-                          {section.name}
-                        </span>
-                        <span className="ml-6 flex items-center">
-                          <Plus
-                            aria-hidden="true"
-                            className="h-5 w-5 group-data-[open]:hidden"
-                          />
-                          <Minus
-                            aria-hidden="true"
-                            className="h-5 w-5 [.group:not([data-open])_&]:hidden"
-                          />
-                        </span>
-                      </DisclosureButton>
-                    </h3>
-                    <DisclosurePanel className="pt-6">
-                      <div className="space-y-4">
-                        {section.options.map((option, optionIdx) => (
-                          <div key={option.value} className="flex items-center">
-                            <input
-                              defaultValue={option.value}
-                              defaultChecked={option.checked}
-                              id={`filter-${section.id}-${optionIdx}`}
-                              name={`${section.id}[]`}
-                              type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                            />
-                            <label
-                              htmlFor={`filter-${section.id}-${optionIdx}`}
-                              className="ml-3 text-sm text-gray-600"
-                            >
-                              {option.label}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </DisclosurePanel>
-                  </Disclosure>
-                ))}
-              </form>
+                 <Filters />
+              </div>
 
               {/* Product grid */}
-              <div className="lg:col-span-4 ">
+              <div className=" flex flex-wrap justify-center align-center ">
                 <ProductCard />
               </div>
+       
             </div>
           </section>
         </main>
