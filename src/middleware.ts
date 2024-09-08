@@ -30,6 +30,7 @@ export default async function middleware(req: NextRequest): Promise<Response | u
     req,
     secret,
     secureCookie: cookies,
+    salt,
   });
 
   // If the user is not authenticated, redirect them to the login page
