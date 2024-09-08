@@ -1,17 +1,12 @@
-// /layouts/site-layout.tsx
-import React from "react";
-import { MainNav } from "@/components/main-nav";
+import React from 'react';
+import { MainNav } from '@/components/main-nav';
+import { ScrollDetector } from '@/components/scroll-detector'; // Client-side component for scroll detection
 
-
-
-
-const SiteLayout = async ({ children }: { children: React.ReactNode }) => {
-
-
+const SiteLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
+      <ScrollDetector />
       <MainNav />
-      <div>hello</div>
       {children}
     </>
   );
