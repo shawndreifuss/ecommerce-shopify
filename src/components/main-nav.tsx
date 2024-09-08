@@ -1,8 +1,12 @@
 
 
-import Link from "next/link"
-import { CircleUser, Menu, Package2, } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { User,  } from 'lucide-react'; 
+import { ShoppingCart } from '@/components/shopping-cart';
+import { NavLinks } from '@/components/nav-links'; 
+import{ MobileNav}  from "@/components/mobile-nav";
+import Image from 'next/image';
+import { auth, signOut } from '@/auth'
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,120 +15,131 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import Image from "next/image"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { NavLinks } from "@/components/nav-links"
-import logo from '@/assets/images/logo.png'
-import SearchModal from "@/components/search-modal"
-import { auth, signOut } from '@/auth'
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { NotificationDropdown } from '@/components/notifications-dropdown';
 
-const MainNav = async () => {
 
-  const session = await auth()
-  const user = session?.user
+
+
+interface User {
+  name: string;
+  email: string;
+  image: string;
+  id: string;
+  role: string;
+}
+
+// Define the props interface for `MainNav`
+interface MainNavProps {
+  user: User | null; // or whatever type you expect from your auth provider
+}
+
+export async function MainNav() {
+
+  const session = await auth(); 
+  const user = session?.user;
+
+ 
+
 
   return (
-    <header className="sticky top-0 flex h-20 items-center gap-4 border-b bg-background px-4 md:px-6">
-      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-        <Link
-          href="/"
-          className="flex items-center gap-2 text-lg font-semibold md:text-base"
-        >
-       <Image src={logo} width={100} height={100} alt="Everything Home logo" />
+    <header className="w-full sticky top-0 z-50 border-b border-gray-200 text-gray-500">
+      <div className="container mx-auto px-4 py-2 flex items-center justify-between">
+        
+        {/* Logo Section */}
+        <div className="flex items-center space-x-4">
+          {/* Hamburger Menu */}
+          <div className="md:hidden lg:hidden block">  <MobileNav  /></div>
+       
 
-       <span className="sr-only">Everything Home</span>
-        </Link>
-       <NavLinks />
-      </nav>
-      <Sheet>
-      <SheetTrigger asChild>
-            <Button
-              variant="outline"
-              size="icon"
-              className="shrink-0 md:hidden"
-            >
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Toggle navigation menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left">
-            <nav className="grid gap-6 text-lg font-medium">
-              <Link
-                href="/"
-                className="flex items-center gap-2 text-lg font-semibold"
-              >
-                <Package2 className="h-6 w-6" />
-                <span className="sr-only">Everything Home</span>
-              </Link>
-              <Link
-                href="/"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Home
-              </Link>
-              <Link
-                href="/collections"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Collections
-              </Link>
-              <Link
-                href="/orders"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Orders
-              </Link>
-              <Link
-                href="/my-account"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                My Account
-              </Link>
-              <Link href="/settings" className="hover:text-foreground">
-                Settings
-              </Link>
-            </nav>
-          </SheetContent>
-        </Sheet>
-        <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-        <SearchModal />
-{!user ? (
-  <>
-            <Link href={'/login'}>
-            <Button className="bg-primary">Login</Button>
-            </Link>
-            <Link href={'/login'}>
-            <Button className="bg-primary">Sign Up</Button>
-            </Link>
-              </>
-            ) : (
-          <DropdownMenu>
+          {/* Logo */}
+          <span className="text-2xl font-bold text-gray-500">Everything Home<span className='text-red-900'>.</span></span>
+        </div>
+
+        {/* Search Bar for desktop */}
+        <div className="hidden md:flex flex-grow mx-8">
+          <input
+            type="text"
+            placeholder="Search products & help ..."
+            className="w-full px-4 py-2 border border-gray-300 rounded-md"
+          />
+        </div>
+
+        {/* Icons Section */}
+        <div className="flex items-center space-x-6">
+        
+         <NotificationDropdown />
+          <ShoppingCart />
+          {user ? ( <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="secondary" size="icon" className="rounded-full">
-                <CircleUser className="h-5 w-5" />
-                <span className="sr-only">Toggle user menu</span>
+              <Button
+                variant="outline"
+                size="icon"
+                className="overflow-hidden rounded-full"
+              >
+                <Image
+                  src={user?.image ? user.image : "/avatar.png"}
+                  width={36}
+                  height={36}
+                  alt="Avatar"
+                  className="overflow-hidden rounded-full"
+                />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem><Link href={'/settings'}>Settings</Link></DropdownMenuItem>
+              <Link href="/settings">
+              <DropdownMenuItem>Settings</DropdownMenuItem>
+              </Link>
               <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator color="primary" />
-              <form action={async () => {
-        'use server';
+              <DropdownMenuSeparator />
+              <form
+      action={async () => {
+        "use server"
         await signOut()
-       }}>
-        <button className="flex w-full h-full justify-start p-2 align-center " type='submit'> <span>Sign Out</span></button>
-       </form>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        )}  
-        </div>
-      
-      </header>
+      }}
+    >
+        <DropdownMenuItem><button type='submit'>Logout</button></DropdownMenuItem>
+    </form>
+            
 
-  )
+            </DropdownMenuContent>
+          </DropdownMenu>) :(
+          <>
+          <Link href={'/login'}>
+          <Button className="bg-primary">Login</Button>
+          </Link>
+          <Link href={'/register'}>
+          <Button className="bg-primary">Sign Up</Button>
+          </Link>
+            </>
+          )
+}
+        </div>
+      </div>
+
+
+
+
+      {/* Mobile Search Bar */}
+      <div className="block md:hidden px-4 py-2">
+        <input
+          type="text"
+          placeholder="Search products & help ..."
+          className="w-full px-4 py-2 border border-gray-300 rounded-md"
+        />
+      </div>
+
+      {/* Nav Links for Desktop */}
+      <nav className="hidden md:flex justify-start w-screen space-x-10 py-2">
+        <div className="p-2">
+          <NavLinks />
+        </div>
+      </nav>
+    </header>
+  );
 }
 
-export default MainNav
+

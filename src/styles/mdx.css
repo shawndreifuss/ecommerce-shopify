@@ -1,0 +1,3 @@
+.NavigationMenuContent[data-motion='from-start'] {
+    animation-name: enterFromLeft;
+  }

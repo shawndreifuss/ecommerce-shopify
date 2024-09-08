@@ -1,21 +1,36 @@
 import NextAuth from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "@/lib/db";
-import Github from "next-auth/providers/github";
 import Credentials from "next-auth/providers/credentials";
 import { LoginSchema } from "@/schemas";
-import { getUserByEmail } from "./data/user";
+import { getUserByEmail, getUserById } from "@/data/user";
 import bcrypt from "bcrypt";
+import Google from "next-auth/providers/google";
+
+
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
+  
   callbacks: {
     async session({ session, token }) {
       if (token.sub && session.user) {
         session.user.id = token.sub
       }
+
+      if (token.role && session.user) {
+        session.user.role = token.role
+      }
       return session
     },
     async jwt({ token, user }) {
+      if (!token.sub) return token;
+
+      const existingUser = await getUserById(token.sub);
+
+      if (!existingUser) return token;
+
+      token.role = existingUser.role; 
+
       if (user) {
         token.sub = user.id; // Add user ID to the token when signing in
         token.email = user.email; // Optionally add other data
@@ -27,6 +42,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   session: { strategy: "jwt" },
   secret: process.env.AUTH_SECRET,
   providers: [
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
     Credentials({
       async authorize(credentials) {
         const validatedFields = LoginSchema.safeParse(credentials);

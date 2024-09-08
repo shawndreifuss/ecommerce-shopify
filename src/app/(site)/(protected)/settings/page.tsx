@@ -1,12 +1,11 @@
 import React from 'react'
+import { auth } from '@/auth'
 
 const SettingsPage = async () => {
 
-
+  const session = await auth()
   return (
-    <div>
-      Settings Page
-    </div>
+    <div>{JSON.stringify(session)}</div>
   )
 }
 
