@@ -30,7 +30,7 @@ export function ShoppingCart() {
         <SheetTrigger asChild>
           <Button variant="ghost">
             <Shopping className="w-6 h-6" />
-            <span className="ml-2 text-sm">Cart ({cartItems.length})</span>
+            <span className="ml-2 text-sm">({cartItems.length})</span>
           </Button>
         </SheetTrigger>
 

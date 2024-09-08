@@ -67,7 +67,7 @@ export async function MainNav() {
         </div>
 
         {/* Icons Section */}
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-1">
         
          <NotificationDropdown />
           <ShoppingCart />

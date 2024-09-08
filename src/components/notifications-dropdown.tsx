@@ -19,7 +19,7 @@ import { notification } from "@/dummy-data/notifications";
           <Button variant="ghost" className="relative">
             <Bell className="w-6 h-6 text-gray-500" />
             {/* Notification Indicator */}
-            <div className="absolute top-0 right-0 w-2 h-2 bg-red-500 border border-white rounded-full"></div>
+            <div className="absolute top-2 right-4 w-2 h-2 bg-red-500 border border-white rounded-full"></div>
           </Button>
         </DropdownMenuTrigger>
   
