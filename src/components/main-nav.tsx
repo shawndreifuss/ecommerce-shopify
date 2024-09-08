@@ -63,7 +63,7 @@ export const MainNav = async () => {
         </div>
 
         {/* Icons Section */}
-        <div className="flex">
+        <div className="flex align-center justify-between">
           <NotificationDropdown />
           <ShoppingCart />
 
@@ -101,8 +101,8 @@ export const MainNav = async () => {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Link href={'/login'}>
-              <UserCircle className="w-6 h-6 text-gray-500" />
+            <Link href={'/login'} className='flex  align-center justify-center'>
+              <UserCircle className=" text-gray-500 self-center" />
             </Link>
           )}
         </div>
@@ -119,7 +119,7 @@ export const MainNav = async () => {
 
       {/* Nav Links for Desktop */}
       <nav className="hidden md:flex justify-start w-screen space-x-10 py-2">
-        <div className="p-2">
+        <div className="p-2 pl-10">
           <NavLinks />
         </div>
       </nav>
