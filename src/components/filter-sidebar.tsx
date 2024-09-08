@@ -61,7 +61,9 @@ const FilterSidebar = () => {
               </div>
 
               {/* Filters */}
+              <div className="w-full px-4">
              <Filters />
+             </div>
             </DialogPanel>
           </div>
         </Dialog>

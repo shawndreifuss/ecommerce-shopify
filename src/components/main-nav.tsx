@@ -43,7 +43,7 @@ export const MainNav = async () => {
         {/* Logo Section */}
         <div className="flex items-start space-x-4">
           {/* Hamburger Menu */}
-          <div className="md:hidden lg:hidden block flex justify-center align-center items">
+          <div className="md:hidden lg:hidden flex justify-center align-center items">
             <MobileNav />
           </div>
 
