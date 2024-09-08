@@ -1,0 +1,25 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/node"
+      }
+    ],
+    "env": {
+      "DATABASE_URL": "@database_url", 
+      "NEXTAUTH_URL": "@nextauth_url"  
+    },
+    "buildCommand": "npm run build",
+    "postInstall": "prisma generate",
+    "rewrites": [
+      { "source": "/(.*)", "destination": "/" }
+    ],
+    "functions": {
+      "api/auth/[...nextauth]": {
+        "memory": 512,
+        "maxDuration": 10
+      }
+    }
+  }
+  
