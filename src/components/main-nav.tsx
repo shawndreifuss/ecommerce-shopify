@@ -44,13 +44,13 @@ export async function MainNav() {
 
 
   return (
-    <header className="w-full sticky top-0 z-50 border-b border-gray-200 text-gray-500">
-      <div className="container mx-auto px-4 py-2 flex items-center justify-between">
+    <header className="w-full sticky top-0 left-0 right-0 z-50 border-b border-gray-200 text-gray-500">
+      <div className=" mx-auto px-4 py-2 flex items-center justify-between">
         
         {/* Logo Section */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-start space-x-4">
           {/* Hamburger Menu */}
-          <div className="md:hidden lg:hidden block">  <MobileNav  /></div>
+          <div className="md:hidden lg:hidden block flex justify-center align-center items-center">  <MobileNav  /></div>
        
 
           {/* Logo */}
