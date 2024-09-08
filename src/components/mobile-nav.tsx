@@ -64,46 +64,7 @@ export function MobileNav() {
       </SheetTrigger>
       <SheetContent side="left" className="w-screen">
         {/* Navigation Links */}
-        <nav className="flex flex-col space-y-4 py-4">
-          <TooltipProvider>
-            <div className="flex w-full gap-4 justify-end p-3">
-              {/* Message Icon Button with Tooltip */}
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" className="p-2">
-                    <MessageCircle className="w-6 h-6 text-gray-500" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p className="text-gray-500">Messages</p>
-                </TooltipContent>
-              </Tooltip>
-
-              {/* Heart Icon Button with Tooltip */}
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" className="p-2">
-                    <Heart className="w-6 h-6 text-gray-500" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p className="text-gray-500">Favorites</p>
-                </TooltipContent>
-              </Tooltip>
-
-              {/* Shopping Cart Icon Button with Tooltip */}
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" className="p-2">
-                    <ShoppingCart className="w-6 h-6 text-gray-500" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p className="text-gray-500">Cart</p>
-                </TooltipContent>
-              </Tooltip>
-            </div>
-          </TooltipProvider>
+        <nav className="flex flex-col space-y-4 py-8">
           {/* Products Dropdown */}
           <div>
             <button
@@ -322,7 +283,7 @@ export function MobileNav() {
         </nav>
 
         {/* Account Section */}
-        <div className="absolute bottom-0 ">
+        <div className=" ">
           <div className="flex flex-col mb-4 space-y-4 text-gray-500 py-4 ">
             <button className="flex items-center space-x-2">
               <UserCircle className="w-5 h-5" />{" "}

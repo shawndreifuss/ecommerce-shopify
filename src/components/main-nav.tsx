@@ -1,6 +1,6 @@
 
 
-import { User,  } from 'lucide-react'; 
+import { User, UserCircle,  } from 'lucide-react'; 
 import { ShoppingCart } from '@/components/shopping-cart';
 import { NavLinks } from '@/components/nav-links'; 
 import{ MobileNav}  from "@/components/mobile-nav";
@@ -44,17 +44,18 @@ export async function MainNav() {
 
 
   return (
-    <header className="w-full sticky top-0 left-0 right-0 z-50 border-b border-gray-200 text-gray-500">
+    <header className="w-full sticky top-0 left-0 right-0 z-50 border-b border-gray-200 text-gray-500"> 
+    <span className=" w-screen pt-4 text-center text-2xl font-bold text-gray-500 block md:hidden lg:hidden ">Everything Home<span className='text-red-900'>.</span></span>
+      
       <div className=" mx-auto px-4 py-2 flex items-center justify-between">
-        
-        {/* Logo Section */}
+       {/* Logo Section */}
         <div className="flex items-start space-x-4">
           {/* Hamburger Menu */}
-          <div className="md:hidden lg:hidden block flex justify-center align-center items-center">  <MobileNav  /></div>
+          <div className="md:hidden lg:hidden block flex justify-center align-center items">  <MobileNav  /></div>
        
 
           {/* Logo */}
-          <span className="text-2xl font-bold text-gray-500">Everything Home<span className='text-red-900'>.</span></span>
+          <span className="text-2xl font-bold text-gray-500 hidden md:block">Everything Home<span className='text-red-900'>.</span></span>
         </div>
 
         {/* Search Bar for desktop */}
@@ -67,7 +68,7 @@ export async function MainNav() {
         </div>
 
         {/* Icons Section */}
-        <div className="flex items-center space-x-1">
+        <div className="flex ">
         
          <NotificationDropdown />
           <ShoppingCart />
@@ -109,10 +110,7 @@ export async function MainNav() {
           </DropdownMenu>) :(
           <>
           <Link href={'/login'}>
-          <Button className="bg-primary">Login</Button>
-          </Link>
-          <Link href={'/register'}>
-          <Button className="bg-primary">Sign Up</Button>
+          <UserCircle className="w-6 h-6 text-gray-500" />
           </Link>
             </>
           )
