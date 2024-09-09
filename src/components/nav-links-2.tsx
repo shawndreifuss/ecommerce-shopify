@@ -26,7 +26,7 @@ export function NavLinks2() {
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 md:w-[300px] lg:w-[400px] text-gray-500">
               {bundlesItems.map((item) => (
-                <ListItem key={item.title} title={item.title} href={item.href} />
+                <ListItem key={item.title} title={item.title} href={`/products/${item.href}`} />
               ))}
             </ul>
           </NavigationMenuContent>
@@ -38,7 +38,7 @@ export function NavLinks2() {
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 md:w-[300px] lg:w-[400px] text-gray-500">
               {getInspiredItems.map((item) => (
-                <ListItem key={item.title} title={item.title} href={item.href} />
+                <ListItem key={item.title} title={item.title} href={`/products/${item.href}`} />
               ))}
             </ul>
           </NavigationMenuContent>
@@ -50,7 +50,7 @@ export function NavLinks2() {
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 md:w-[300px] lg:w-[400px] text-gray-500">
               {sofaCollections.map((item) => (
-                <ListItem key={item.title} title={item.title} href={item.href} />
+                <ListItem key={item.title} title={item.title} href={`/products/${item.href}`} />
               ))}
             </ul>
           </NavigationMenuContent>
@@ -58,7 +58,7 @@ export function NavLinks2() {
 
         {/* Other Navigation Links */}
         <NavigationMenuItem>
-          <Link href="/new-arrivals" legacyBehavior passHref>
+          <Link href="/products/new-arrivals" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               New Arrivals
             </NavigationMenuLink>
@@ -66,7 +66,7 @@ export function NavLinks2() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <Link href="/sale" legacyBehavior passHref>
+          <Link href="/products/sale" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Sale
             </NavigationMenuLink>

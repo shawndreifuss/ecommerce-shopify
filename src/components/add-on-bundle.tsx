@@ -1,45 +1,9 @@
 // components/AddOnBundle.tsx
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { Product, bundle, Bundle } from '@/dummy-data/bundle';
 
-type Product = {
-  name: string;
-  price: number;
-  colors?: string[]; // Color options
-  image: string;
-};
 
-type Bundle = {
-  title: string;
-  description: string;
-  products: Product[];
-  total: number;
-  discount: number;
-  finalPrice: number;
-};
-
-const bundle: Bundle = {
-  title: 'The Stark Contrasts Dining Bundle',
-  description:
-    'Opposites attract, and together they make something beautiful. The Plumas table sets a beautiful foundation for your weekday dining needs, and extends for dinner parties, game nights, and other weekend activities. Paired with the Rus chairs, this set comes together to feel simple, easy, and elegant.',
-  products: [
-    {
-      name: 'Plumas White Oak Dining Table',
-      price: 999,
-      colors: ['#FFFFFF', '#8B4513'],
-      image: '/table-image.png',
-    },
-    {
-      name: '4 x Rus Norfolk Green Dining Chair',
-      price: 796,
-      colors: ['#000000', '#B5651D', '#F5F5DC'],
-      image: '/chair-image.png',
-    },
-  ],
-  total: 1795,
-  discount: 107,
-  finalPrice: 1688,
-};
 
 export default function AddOnBundle() {
   return (
@@ -52,7 +16,8 @@ export default function AddOnBundle() {
             alt="Bundle Image"
             width={400}
             height={400}
-            className="object-contain"
+            className="cover w-full h-full rounded-md"
+            
           />
         </div>
         <div className="flex gap-4">
@@ -67,7 +32,7 @@ export default function AddOnBundle() {
                 alt={`Thumbnail ${index + 1}`}
                 width={80}
                 height={80}
-                className="object-cover"
+                className="cover w-full h-full rounded-lg"
               />
             </div>
           ))}
@@ -79,9 +44,7 @@ export default function AddOnBundle() {
         {/* Bundle Title and Description */}
         <h1 className="text-3xl font-semibold">{bundle.title}</h1>
         <p className="text-gray-600">{bundle.description}</p>
-        <a href="#" className="text-primary underline">
-          Shop all dining room bundles
-        </a>
+       
 
         {/* Products */}
         {bundle.products.map((product, index) => (

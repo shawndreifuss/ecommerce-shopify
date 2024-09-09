@@ -77,10 +77,10 @@ export const exampleProducts = [
   ];
   
   export const getInspiredItems = [
-    { title: "Modern Living Spaces", href: "#" },
-    { title: "Scandinavian Minimalism", href: "#" },
-    { title: "Outdoor Relaxation", href: "#" },
-    { title: "Cozy Bedroom Ideas", href: "#" },
+    { title: "Modern Living Spaces", href: "modern-living-spaces" },
+    { title: "Scandinavian Minimalism", href: "scandinavian-minimalism" },
+    { title: "Outdoor Relaxation", href: "outdoor-relaxation" },
+    { title: "Cozy Bedroom Ideas", href: "cozy-bedroom-ideas" },
   ];
 
   export const roomCategories = [
@@ -163,21 +163,21 @@ export const exampleProducts = [
     {
       title: "Modern Sectionals",
       description: "Spacious and versatile sectionals perfect for modern living rooms.",
-      href: "/sofa-collections/modern-sectionals",
+      href: "modern-sectionals",
     },
     {
       title: "Mid-Century Sofas",
       description: "Elegant mid-century sofas with clean lines and timeless appeal.",
-      href: "/sofa-collections/mid-century-sofas",
+      href: "mid-century-sofas",
     },
     {
       title: "Lounge Sofas",
       description: "Comfortable lounge sofas ideal for relaxation and family gatherings.",
-      href: "/sofa-collections/lounge-sofas",
+      href: "lounge-sofas",
     },
     {
       title: "Leather Sofas",
       description: "Durable and luxurious leather sofas that add sophistication to any space.",
-      href: "/sofa-collections/leather-sofas",
+      href: "leather-sofas",
     },
   ];

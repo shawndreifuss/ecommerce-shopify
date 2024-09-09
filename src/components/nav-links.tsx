@@ -36,8 +36,8 @@ export function NavLinks() {
                     {category.title}
                   </h3>
                   <ul>
-                    {category.items.map((item, idx) => (
-                   <SmallListItem key={idx} href={`/${item}`} title={item} />
+                    {category.items.map((category, idx) => (
+                   <SmallListItem key={idx} href={`/products/${category}`} title={category} />
                     ))}
                   </ul>
                 </div>
@@ -58,7 +58,7 @@ export function NavLinks() {
                   </h3>
                   <ul>
                     {category.items.map((item, idx) => (
-                       <SmallListItem key={idx} href={`/${item}`} title={item} />
+                       <SmallListItem key={idx} href={`/products/${item}`} title={item} />
                     ))}
                   </ul>
                 </div>
@@ -103,13 +103,13 @@ export function NavLinks() {
 
               </li>
               <div>
-                <ListItem href="/docs" title="All Best Sellers" />
-                <ListItem href="/docs/installation" title="Living Room" />
-                <ListItem href="/docs/installation" title="Bedroom" />
-                <ListItem href="/docs/installation" title="Dining Room" />
-                <ListItem href="/docs/installation" title="Home Office" />
-                <ListItem href="/docs/installation" title="Decor" />
-                <ListItem href="/docs/installation" title="Outdoor" />
+                <ListItem href="/products/all" title="All Best Sellers" />
+                <ListItem href="/products/living-room" title="Living Room" />
+                <ListItem href="/products/bedroom" title="Bedroom" />
+                <ListItem href="/products/dining-room" title="Dining Room" />
+                <ListItem href="/products/home-office" title="Home Office" />
+                <ListItem href="/products/decor" title="Decor" />
+                <ListItem href="/products/outdoor" title="Outdoor" />
               </div>
             </ul>
           </NavigationMenuContent>

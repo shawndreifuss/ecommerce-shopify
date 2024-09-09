@@ -35,10 +35,10 @@ export const MainNav = async () => {
 
   return (
     <header className="w-full fixed top-0 left-0 right-0 z-50 border-b border-gray-200 text-gray-500 bg-background pt-4">
-      <span className="w-screen pt-4 text-center text-2xl font-bold text-gray-500 block md:hidden lg:hidden">
+    <Link href={'/'}> <span className=" cursor-pointer w-screen pt-4 text-center text-2xl font-bold text-gray-500 block md:hidden lg:hidden">
         Everything Home<span className="text-red-900">.</span>
       </span>
-
+</Link> 
       <div className="mx-auto px-4 py-2 flex items-center justify-between">
         {/* Logo Section */}
         <div className="flex items-start space-x-4">
@@ -48,9 +48,10 @@ export const MainNav = async () => {
           </div>
 
           {/* Logo */}
-          <span className="text-2xl font-bold text-gray-500 hidden md:block">
+          <Link href={'/'}> <span className=" cursor=pointer text-2xl font-bold text-gray-500 hidden md:block">
             Everything Home<span className="text-red-900">.</span>
           </span>
+          </Link>
         </div>
 
         {/* Search Bar for desktop */}

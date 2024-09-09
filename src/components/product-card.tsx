@@ -1,9 +1,10 @@
 'use client'
 import { useState } from 'react';
 import Image from 'next/image';
-import { Heart, ShoppingCart } from 'lucide-react';
+import {   ShoppingCart } from 'lucide-react';
 import { Product, products } from '@/dummy-data/example-products';
 import { Button } from './ui/button';
+import Link from 'next/link';
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -21,6 +22,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   };
 
   return (
+    <Link href={`/product/${product.id}`}>
     <div className="max-w-sm bg-white shadow-md rounded-md overflow-hidden mb-6">
       <div className="relative">
         <Image
@@ -72,6 +74,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 
@@ -79,30 +82,13 @@ const ProductList: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1); // Current page state
   const [productsPerPage, setProductsPerPage] = useState(25); // Default products per page
 
-  // Calculate total pages based on productsPerPage and total products
-  const totalPages = Math.ceil(products.length / productsPerPage);
 
   // Determine the products to display on the current page
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const currentProducts = products.slice(startIndex, endIndex);
 
-  const handleProductsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setProductsPerPage(Number(e.target.value)); // Update products per page
-    setCurrentPage(1); // Reset to page 1 when products per page changes
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
+  
 
   return (
     <div className="w-full">

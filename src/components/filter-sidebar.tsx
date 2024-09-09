@@ -19,6 +19,8 @@ import {
   } from "@/components/ui/breadcrumb"
   import ProductCard from "@/components/product-card";
 import Filters from "@/components/filters";
+import { useParams } from "next/navigation";
+import { capitalizeWords } from "@/utils/word-capitalize";
   
 
 function classNames(...classes: any) {
@@ -26,10 +28,15 @@ function classNames(...classes: any) {
 }
 
 const FilterSidebar = () => {
+  const  params  = useParams();
+   const slug = Array.isArray(params.slug) ? params.slug.join('-') : params.slug;
+
+
+
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   return (
-    <div className="bg-background mt-20 w-screen">
+    <div className="bg-background mt-24 w-screen">
       <div>
         <Dialog
           open={mobileFiltersOpen}
@@ -73,12 +80,12 @@ const FilterSidebar = () => {
          
         </BreadcrumbItem> <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href="/shop">Shop</BreadcrumbLink>
+          <BreadcrumbLink href="/products">Shop</BreadcrumbLink>
          
         </BreadcrumbItem> <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink  href="/new-arrivals">
-            New Arrivals
+          <BreadcrumbLink  href={`/products/${params.slug}`}>
+          <p>{capitalizeWords(slug)}</p>
           </BreadcrumbLink>
         </BreadcrumbItem>
       </BreadcrumbList>
