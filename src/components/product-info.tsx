@@ -21,16 +21,17 @@ type Product = {
   reviews?: number;
 };
 
-// Product Data
+// Product Data with fixed description
 const product: Product = {
-  id: 1,
-  name: 'Wooden Dining Table',
-  description: "The Shaker-inspired Rus Chair is simple, bold, and timeless — what else can we say? The Shakers really knew what they were doing when they put spindles on chairs, and sometimes you gotta stick to the classics.",
-  price: 799,
-  colors: ['#B5651D', '#F5F5DC', '#6B4226', '#A0522D'], // Brown, Beige, Dark Brown, Saddle Brown
-  images: [HomeOfficeImage, BestSellerImage, SideTableImage], // Static images
-  reviews: 529
-};
+    id: 1,
+    name: 'Wooden Dining Table',
+    description: "The Shaker-inspired Rus Chair is simple, bold, and timeless — what else can we say? The Shakers really knew what they were doing when they put spindles on chairs, and sometimes you&#39;ve got to stick to the classics.",
+    price: 799,
+    colors: ['#B5651D', '#F5F5DC', '#6B4226', '#A0522D'], // Brown, Beige, Dark Brown, Saddle Brown
+    images: [HomeOfficeImage, BestSellerImage, SideTableImage],
+    reviews: 529,
+  };
+  
 
 export function ProductInfo() {
   // State to manage the currently selected image
