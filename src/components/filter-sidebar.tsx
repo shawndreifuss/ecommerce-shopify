@@ -4,16 +4,13 @@ import {
   Dialog,
   DialogBackdrop,
   DialogPanel,
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
   Menu,
   MenuButton,
   MenuItem,
   MenuItems,
 } from "@headlessui/react";
-import { X, ChevronDown, Minus, Plus, Filter } from "lucide-react";
-import { sortOptions, subCategories, filters } from "@/dummy-data/filter-data";
+import { X, ChevronDown, Filter } from "lucide-react";
+import { sortOptions} from "@/dummy-data/filter-data";
 import {
     BreadcrumbItem,
     BreadcrumbLink,
@@ -21,7 +18,7 @@ import {
     BreadcrumbSeparator,
   } from "@/components/ui/breadcrumb"
   import ProductCard from "@/components/product-card";
-import Filters from "./filters";
+import Filters from "@/components/filters";
   
 
 function classNames(...classes: any) {
@@ -32,7 +29,7 @@ const FilterSidebar = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   return (
-    <div className="bg-background mt-20  w-screen">
+    <div className="bg-background mt-20 w-screen">
       <div>
         <Dialog
           open={mobileFiltersOpen}
@@ -61,14 +58,14 @@ const FilterSidebar = () => {
               </div>
 
               {/* Filters */}
-              <div className="w-full px-4">
+              <div className="w-full px-4 sticky top-0 ">
              <Filters />
              </div>
             </DialogPanel>
           </div>
         </Dialog>
 
-        <main className="mx-auto w-screen px-4 sm:px-6 lg:px-12">
+        <main className="mx-auto w-screen px-4 sm:px-6 lg:px-12 ">
             <div className="pt-24 md:pt-20 lg:pt-16">
         <BreadcrumbList>
         <BreadcrumbItem>
@@ -86,7 +83,7 @@ const FilterSidebar = () => {
         </BreadcrumbItem>
       </BreadcrumbList>
       </div>
-          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">
+          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6 z-50 bg-background ">
             
             <h1 className="text-2xl font-bold tracking-tight text-gray-500">
              All Products
@@ -145,13 +142,13 @@ const FilterSidebar = () => {
 <div className="w-full flex ">
             
               {/* Filters */}
-              <div className="hidden lg:block w-fit h-screen sticky top-24 ">
+              <div className="hidden lg:block w-fit h-screen  ">
                 <h3 className="sr-only">Categories</h3>
                  <Filters />
               </div>
 
               {/* Product grid */}
-              <div className=" flex flex-wrap justify-center align-center ">
+              <div className="flex flex-wrap justify-center align-center ">
                 <ProductCard />
               </div>
        

@@ -34,7 +34,7 @@ export const MainNav = async () => {
   const user = session?.user || null;
 
   return (
-    <header className="w-full fixed top-0 left-0 right-0 z-50 border-b border-gray-200 text-gray-500 bg-background">
+    <header className="w-full fixed top-0 left-0 right-0 z-50 border-b border-gray-200 text-gray-500 bg-background pt-4">
       <span className="w-screen pt-4 text-center text-2xl font-bold text-gray-500 block md:hidden lg:hidden">
         Everything Home<span className="text-red-900">.</span>
       </span>

@@ -1,8 +1,8 @@
 'use client'
 import { useState } from 'react';
-import Image, { StaticImageData } from 'next/image'; // Import Image component
+import Image from 'next/image';
 import { Heart, ShoppingCart } from 'lucide-react';
-import { Product, products} from '@/dummy-data/example-products';
+import { Product, products } from '@/dummy-data/example-products';
 import { Button } from './ui/button';
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
@@ -21,11 +21,10 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   };
 
   return (
-    <div className="max-w-sm  bg-white shadow-md rounded-md overflow-hidden mb-6">
-      {/* Image Slider */}
+    <div className="max-w-sm bg-white shadow-md rounded-md overflow-hidden mb-6">
       <div className="relative">
         <Image
-          src={product.images[currentImageIndex]} // Use Next.js Image component
+          src={product.images[currentImageIndex]}
           alt={product.name}
           className="w-full h-56 object-cover"
           width={500}
@@ -43,8 +42,6 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           </button>
         </div>
       </div>
-
-      {/* Product Details */}
       <div className="p-4">
         <h3 className="text-xl font-semibold">{product.name}</h3>
         <p className="mt-2 text-gray-500">{product.description}</p>
@@ -52,8 +49,6 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           Buy in installments with Klarna Wallet
         </p>
       </div>
-
-      {/* Price & Color Options */}
       <div className="px-4 pb-4">
         <div className="flex items-center justify-between">
           <span className="text-2xl font-bold">${product.price}</span>
@@ -67,14 +62,12 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             ))}
           </div>
         </div>
-
-        {/* Action Buttons */}
         <div className="mt-4 flex justify-between">
           <Button className="flex bg-white items-center justify-center w-full py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-background">
-            <ShoppingCart className="mr-2 h-5 w-5" /> add to cart 
+            <ShoppingCart className="mr-2 h-5 w-5" /> add to cart
           </Button>
-          <Button className="ml-2 flex items-center justify-center w-full py-2 text-white rounded-lg ">
-         Buy now
+          <Button className="ml-2 flex items-center justify-center w-full py-2 text-white rounded-lg">
+            Buy now
           </Button>
         </div>
       </div>
@@ -83,11 +76,46 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 };
 
 const ProductList: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState(1); // Current page state
+  const [productsPerPage, setProductsPerPage] = useState(25); // Default products per page
+
+  // Calculate total pages based on productsPerPage and total products
+  const totalPages = Math.ceil(products.length / productsPerPage);
+
+  // Determine the products to display on the current page
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  const currentProducts = products.slice(startIndex, endIndex);
+
+  const handleProductsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setProductsPerPage(Number(e.target.value)); // Update products per page
+    setCurrentPage(1); // Reset to page 1 when products per page changes
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
-    <div className="flex flex-wrap gap-6 w-full  align-center">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+    <div className="w-full">
+    
+
+      {/* Product Grid */}
+      <div className="flex flex-wrap gap-6">
+        {currentProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+
+      
     </div>
   );
 };
