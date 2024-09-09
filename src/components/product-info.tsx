@@ -37,6 +37,7 @@ const product: Product = {
 export function ProductInfo() {
   // State to manage the currently selected image
   const [selectedImage, setSelectedImage] = useState(product.images[0]);
+  const [quantity, setQuantity] = useState<number>(1);
 
   return (
     <div className="container mx-auto p-8 flex flex-col lg:flex-row gap-8 mt-40 h-full mb-16">
@@ -114,6 +115,7 @@ export function ProductInfo() {
           <p className="text-xl font-bold text-primary">${product.price}</p>
           <p className="text-sm text-gray-500">4.4 ★ ({product.reviews} Reviews)</p>
         </div>
+       
 
         {/* Color Options */}
         <div className="hidden md:block lg:block">
@@ -128,17 +130,37 @@ export function ProductInfo() {
             ))}
           </div>
         </div>
+         {/* Quantity Selector */}
+         <div className="flex items-center space-x-2 mt-4 hidden md:block lg:block">
+          <label htmlFor="quantity" className="text-sm font-medium text-gray-700">
+            Quantity
+          </label>
+          <select
+            id="quantity"
+            value={quantity}
+            onChange={(e) => setQuantity(Number(e.target.value))}
+            className="border-gray-300 rounded-md"
+          >
+            {[1, 2, 3, 4, 5].map((num) => (
+              <option key={num} value={num}>
+                {num}
+              </option>
+            ))}
+          </select>
+        </div>
 
         {/* Shipping and Add to Cart */}
         <div className="hidden md:block ">
+        <div className="flex justify-start  w-full gap-4 pb-4">
+            <Button className="mt-4 w-1/4 ">Add to Cart</Button>
+            <Button className="mt-4 w-1/4 ">Buy Now</Button>
+          </div>
           <p className="text-sm text-gray-600 ">
             Delivered by: <strong>Sep 10th - Oct 4th</strong>
           </p>
           <p className="text-sm text-gray-600">In stock and ready to ship</p>
-          <div className="flex justify-start w-full gap-4">
-            <Button className="mt-4 w-1/3 ">Add to Cart</Button>
-            <Button className="mt-4 w-1/3 ">Buy Now</Button>
-          </div>
+           
+        
         </div>
 
         {/* Related Product */}
