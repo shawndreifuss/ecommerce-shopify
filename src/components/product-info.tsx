@@ -16,8 +16,8 @@ type Product = {
   name: string;
   description: string;
   price: number;
-  colors: string[]; // Hex color codes
-  images: StaticImageData[]; // Using Next.js StaticImageData type for images
+  colors: string[]; 
+  images: StaticImageData[]; 
   reviews?: number;
 };
 
