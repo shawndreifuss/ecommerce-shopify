@@ -25,7 +25,7 @@ type Product = {
 const product: Product = {
     id: 1,
     name: 'Wooden Dining Table',
-    description: 'The Shaker inspired Rus Chair is simple, bold, and timeless — what else can we say? The Shakers really knew what they were doing when they put spindles on chairs, and sometimes you&#39;ve got to stick to the classics.',
+    description: 'The Shaker inspired Rus Chair is simple, bold, and timeless — what else can we say? The Shakers really knew what they were doing when they put spindles on chairs, and sometimes youve got to stick to the classics.',
     price: 799,
     colors: ['#B5651D', '#F5F5DC', '#6B4226', '#A0522D'], // Brown, Beige, Dark Brown, Saddle Brown
     images: [HomeOfficeImage, BestSellerImage, SideTableImage],
