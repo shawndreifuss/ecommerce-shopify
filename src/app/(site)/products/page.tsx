@@ -1,3 +1,4 @@
+'use client'
 import FilterSidebar from '@/components/filter-sidebar'
 import ProductPagination from '@/components/product-pagination'
 import React, { useEffect, useState } from 'react';
