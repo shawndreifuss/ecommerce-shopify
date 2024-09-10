@@ -21,13 +21,41 @@ import {
 import Filters from "@/components/filters";
 import { useParams } from "next/navigation";
 import { capitalizeWords } from "@/utils/word-capitalize";
+
+interface Product {
+  id: string;
+  handle: string;
+  title: string;
+  description: string;
+  priceRange: {
+    minVariantPrice: {
+      amount: string;
+      currencyCode: string;
+    };
+  };
+  images: {
+    edges: Array<{
+      node: {
+        url: string;
+        altText?: string;
+      };
+    }>;
+  };
+}
+
+interface FilterSidebarProps {
+  products: Product[];
+}
+
   
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-const FilterSidebar = () => {
+const FilterSidebar: React.FC<FilterSidebarProps> = ({ products }) => {
+
+  console.log(products)
   const  params  = useParams();
    const slug = Array.isArray(params.slug) ? params.slug.join('-') : params.slug;
 
