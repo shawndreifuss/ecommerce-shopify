@@ -16,22 +16,16 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { NotificationDropdown } from '@/components/notifications-dropdown';
 import { auth, signOut } from '@/auth'; 
+import SearchMobile from '@/components/search-mobile';
+import Search from '@/components/search';
 
-interface User {
-  name: string | null | undefined;
-  email: string;
-  image: string;
-  id: string;
-  role: string;
-}
 
-interface MainNavProps {
-  user: User | null;
-}
 
 export const MainNav = async () => {
   const session = await auth();
   const user = session?.user || null;
+
+ 
 
   return (
     <header className="w-full fixed top-0 left-0 right-0 z-50 border-b border-gray-200 text-gray-500 bg-background pt-4">
@@ -55,13 +49,7 @@ export const MainNav = async () => {
         </div>
 
         {/* Search Bar for desktop */}
-        <div className="hidden md:flex flex-grow mx-8">
-          <input
-            type="text"
-            placeholder="Search products & help ..."
-            className="w-full px-4 py-2 border border-gray-300 rounded-md"
-          />
-        </div>
+        <Search />
 
         {/* Icons Section */}
         <div className="flex align-center justify-between">
@@ -110,13 +98,7 @@ export const MainNav = async () => {
       </div>
 
       {/* Mobile Search Bar */}
-      <div className="block md:hidden px-4 py-2">
-        <input
-          type="text"
-          placeholder="Search products & help ..."
-          className="w-full px-4 py-2 border border-gray-300 rounded-md"
-        />
-      </div>
+      <SearchMobile />
 
       {/* Nav Links for Desktop */}
       <nav className="hidden md:flex justify-start w-screen space-x-10 py-2">

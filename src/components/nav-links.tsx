@@ -19,12 +19,10 @@ import {
 import { Icons } from "@/components/ui/icons";
 import Image from "next/image";
 import { NavLinks2 } from "@/components/nav-links-2";
-import { getCollections } from '@/lib/shopify';
 
 
 
-export function NavLinks() {
-
+export const NavLinks = () => {
 
   return (
     <NavigationMenu>
@@ -85,11 +83,11 @@ export function NavLinks() {
   >
    {bestSellersItems[0].img && (
       <Image
-        src={bestSellersItems[0].img} // Cast to string or StaticImageData
+        src={bestSellersItems[0].img} 
         alt={bestSellersItems[0].title}
-        layout="fill" // Make the image fill the container
-        objectFit="cover" // Ensures the image covers the entire background
-        objectPosition="center" // Centers the background image
+        layout="fill" 
+        objectFit="cover" 
+        objectPosition="center" 
         className="rounded-md "
       />
     )}
