@@ -15,7 +15,7 @@ import {
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { NotificationDropdown } from '@/components/notifications-dropdown';
-import { auth, signOut } from '@/auth'; // Your auth function
+import { auth, signOut } from '@/auth'; 
 
 interface User {
   name: string | null | undefined;

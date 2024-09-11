@@ -19,8 +19,13 @@ import {
 import { Icons } from "@/components/ui/icons";
 import Image from "next/image";
 import { NavLinks2 } from "@/components/nav-links-2";
+import { getCollections } from '@/lib/shopify';
+
+
 
 export function NavLinks() {
+
+
   return (
     <NavigationMenu>
       <NavigationMenuList>

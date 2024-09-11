@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const SiteLayout = ({ children }: { children: React.ReactNode }) => {
+const AllProductsPage = async ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       {children}
@@ -8,4 +8,4 @@ const SiteLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default SiteLayout;
+export default AllProductsPage;

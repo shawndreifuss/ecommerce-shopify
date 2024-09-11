@@ -17,45 +17,18 @@ import {
     BreadcrumbList,
     BreadcrumbSeparator,
   } from "@/components/ui/breadcrumb"
-  import ProductCard from "@/components/product-card";
+  import  {ProductList}  from "@/components/product-list";
 import Filters from "@/components/filters";
 import { useParams } from "next/navigation";
 import { capitalizeWords } from "@/utils/word-capitalize";
-
-interface Product {
-  id: string;
-  handle: string;
-  title: string;
-  description: string;
-  priceRange: {
-    minVariantPrice: {
-      amount: string;
-      currencyCode: string;
-    };
-  };
-  images: {
-    edges: Array<{
-      node: {
-        url: string;
-        altText?: string;
-      };
-    }>;
-  };
-}
-
-interface FilterSidebarProps {
-  products: Product[];
-}
+import { Product } from "@/types/shopify";
 
   
-
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-const FilterSidebar: React.FC<FilterSidebarProps> = ({ products }) => {
-
-  console.log(products)
+const FilterSidebar = ({products}: { products: Product[]}) => {
   const  params  = useParams();
    const slug = Array.isArray(params.slug) ? params.slug.join('-') : params.slug;
 
@@ -184,7 +157,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ products }) => {
 
               {/* Product grid */}
               <div className="flex flex-wrap justify-center align-center ">
-                <ProductCard />
+                <ProductList products={products} />
               </div>
        
             </div>
