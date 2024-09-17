@@ -30,19 +30,12 @@ export const getProductRecommendationsQuery = /* GraphQL */ `
   }
   ${productFragment}
 `;
-
 export const getYouMightAlsoLikeQuery = /* GraphQL */ `
   query getYouMightAlsoLike($tags: [String!], $collectionId: ID, $excludeProductId: ID!) {
     products(
       first: 10, 
-      query: $query, 
-      filters: { 
-        productType: "similar", 
-        tag: $tags, 
-        collectionId: $collectionId,
-      },
-      first: 10,
-      ) {
+      query: $query 
+    ) {
       edges {
         node {
           ...product

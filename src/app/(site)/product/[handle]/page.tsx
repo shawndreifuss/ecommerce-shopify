@@ -9,7 +9,7 @@ import WhyBuySection from "@/components/why-buy-section";
 import { YouMightAlsoLike } from "@/components/you-might-also-like";
 
 import { HIDDEN_PRODUCT_TAG } from '@/lib/constants';
-import { getProduct, getProductRecommendations } from '@/lib/shopify';
+import { getProduct, getProductRecommendations,  } from '@/lib/shopify';
 import { ProductProvider } from "@/components/product/product-context";
 
 export async function generateMetadata({
@@ -52,8 +52,10 @@ export async function generateMetadata({
 
 export default async function ProductPage({ params }: { params: { handle: string } }) {
 
-  const product = await getProduct(params.handle);
-  if (!product) return notFound();
+
+ // Fetch the product data
+ const product = await getProduct(params.handle);
+ if (!product) return notFound();
 
 
 
@@ -62,7 +64,7 @@ export default async function ProductPage({ params }: { params: { handle: string
 
     <div className="flex flex-col gap-4">
       <ProductInfo product={product} />
-      <YouMightAlsoLike  />
+      <YouMightAlsoLike productId={product.id} /> 
       <AddOnBundle />
       <ReviewsSection />
       <WhyBuySection />

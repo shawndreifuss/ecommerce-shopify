@@ -466,37 +466,28 @@ export async function getYouMightAlsoLike({
   collectionId: string | null;
   excludeProductId: string;
 }): Promise<Product[]> {
-  // Build the query string for filtering products
-  let query = '';
+  // Build the query string to filter products
+  let query = `-id:"${excludeProductId}"`;
 
-  // If there are tags, include them in the query
   if (tags.length > 0) {
-    const tagQuery = tags.map(tag => `tag:"${tag}"`).join(' OR ');
-    query += `(${tagQuery}) `;
+    query += ` AND (${tags.map(tag => `tag:"${tag}"`).join(' OR ')})`;
   }
 
-  // If there is a collectionId, include that in the query
   if (collectionId) {
-    query += `AND collection_id:"${collectionId}" `;
+    query += ` AND collection_id:"${collectionId}"`;
   }
-
-  // Exclude the current product by its ID
-  query += `AND NOT id:"${excludeProductId}"`;
 
   const res = await shopifyFetch<ShopifyProductsOperation>({
-    query: getYouMightAlsoLikeQuery,  // This would be your GraphQL query string
-    tags: [TAGS.products],
+    query: getYouMightAlsoLikeQuery,
     variables: {
-      query,  // Pass the dynamically built query string
-      reverse: false,
-      sortKey: 'CREATED_AT',  // Sort the products by the creation date or other desired criteria
+      query,  // The dynamically built query string
+      reverse: false,  // Example: Set reverse to false
+      sortKey: 'CREATED_AT'  // Example: Sort by creation date
     },
   });
 
-  // Extract nodes from the connection object before reshaping
   const products = removeEdgesAndNodes(res.body.data.products);
-
-  // Now pass the array of products to reshapeProducts
   return reshapeProducts(products);
 }
+
 

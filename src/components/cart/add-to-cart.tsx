@@ -38,9 +38,6 @@ function SubmitButton({
         <Button type="button" className="">
           Add to cart
         </Button>
-        <Button type="button" className="inline-flex items-center rounded-lg px-5 py-2.5">
-        Buy Now
-      </Button>
       </Link>
     );
   }
@@ -49,9 +46,6 @@ function SubmitButton({
     <div className="flex gap-4">
       <Button type="submit" className="inline-flex items-center rounded-lg px-5 py-2.5">
         Add to cart
-      </Button>
-      <Button type="button" onClick={handleBuyNowClick} className="inline-flex items-center rounded-lg px-5 py-2.5">
-        Buy Now
       </Button>
     </div>
   );
