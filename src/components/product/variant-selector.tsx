@@ -1,8 +1,8 @@
 'use client';
 
 import clsx from 'clsx';
-import { useProduct, useUpdateURL } from 'components/product/product-context';
-import { ProductOption, ProductVariant } from 'lib/shopify/types';
+import { useProduct, useUpdateURL } from '@/components/product/product-context';
+import { ProductOption, ProductVariant } from '@/types/shopify';
 
 type Combination = {
   id: string;
@@ -86,8 +86,11 @@ export function VariantSelector({
               </button>
             );
           })}
+          
         </dd>
       </dl>
+      {/* <p className="text-sm text-gray-600">Delivered by: <strong>Sep 10th - Oct 4th</strong></p>
+            <p className="text-sm text-gray-600">In stock and ready to ship</p> */}
     </form>
   ));
 }

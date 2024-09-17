@@ -11,13 +11,8 @@ import {
 } from "@headlessui/react";
 import { X, ChevronDown, Filter } from "lucide-react";
 import { sortOptions} from "@/dummy-data/filter-data";
-import {
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbSeparator,
-  } from "@/components/ui/breadcrumb"
-  import  {ProductList}  from "@/components/product-list";
+
+  import  {ProductList}  from "@/components/product/product-list";
 import Filters from "@/components/filters";
 import { useParams } from "next/navigation";
 import { capitalizeWords } from "@/utils/word-capitalize";
@@ -75,21 +70,7 @@ const FilterSidebar = ({products}: { products: Product[]}) => {
 
         <main className="mx-auto w-screen px-4 sm:px-6 lg:px-12 ">
             <div className="pt-24 md:pt-20 lg:pt-16">
-        <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/">Home</BreadcrumbLink>
-         
-        </BreadcrumbItem> <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/products">Shop</BreadcrumbLink>
-         
-        </BreadcrumbItem> <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink  href={`/products/${params.slug}`}>
-          <p>{capitalizeWords(slug)}</p>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-      </BreadcrumbList>
+     
       </div>
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6 z-50 bg-background ">
             

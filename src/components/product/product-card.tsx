@@ -103,30 +103,13 @@ export default function ProductGridItems({ product }: { product: Product }) {
 </div>
 
 
-          <div className="flex items-center justify-between gap-1">
-            <Link href={`/product/${product.handle}`}>
-            <div className="flex gap-2">
-          {product.variants.map((variant) => {
-      const colorOption = variant.selectedOptions.find(
-        (option) => option.name.toLowerCase() === 'color'
-      );
-      const colorHex = colorOption ? colorMap[colorOption.value.toLowerCase()] : null;
-      
-      if (colorHex) {
-        return (
-          <div
-            key={colorOption?.value}
-            className="h-6 w-6 rounded-full border border-gray-300"
-            style={{ backgroundColor: colorHex }}
-            aria-label={`Color option ${colorOption?.value}`}
-          ></div>
-        );
-      }
-      return null; 
-    })}
-    </div>  
-    </Link>
-    <div className="">
+          <div className="flex items-center justify-between gap-1 w-full">
+  
+    
+    <p className="text-2xl font-extrabold leading-tight text-gray-500 dark:text-white text-center flex align-center self-center">
+    ${parseFloat(product.priceRange.minVariantPrice.amount).toFixed(2)}
+  </p>
+      <div>
             <button
               type="button"
               className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
@@ -165,8 +148,8 @@ export default function ProductGridItems({ product }: { product: Product }) {
             </button>
           </div>
           </div>
-        
         </div>
+      
 
         <Link href={`/product/${product.handle}`}
           className="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white"
@@ -242,9 +225,7 @@ export default function ProductGridItems({ product }: { product: Product }) {
         </ul>
 
         <div className="mt-4 flex items-center justify-between gap-4">
-        <p className="text-2xl font-extrabold leading-tight text-gray-900 dark:text-white">
-    $ {parseFloat(product.priceRange.minVariantPrice.amount).toFixed(2)}
-  </p>
+      
 
          
           <AddToCart product={product} />

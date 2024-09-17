@@ -3,7 +3,7 @@ import React from "react";
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import AddOnBundle from "@/components/add-on-bundle";
-import { ProductInfo } from "@/components/product-info";
+import { ProductInfo } from "@/components/product/product-info";
 import ReviewsSection from "@/components/reviews-section";
 import WhyBuySection from "@/components/why-buy-section";
 import { YouMightAlsoLike } from "@/components/you-might-also-like";

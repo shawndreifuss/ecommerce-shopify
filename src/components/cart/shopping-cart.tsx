@@ -53,9 +53,9 @@ export function ShoppingCart() {
       </button>
       {/* Full-Screen Modal */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 h-screen w-screen">
+        <div className="absolute top-0 bottom-0 inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 h-screen w-screen  overflow-y-clip">
           {/* Modal Content */}
-          <div className="relative bg-white w-full h-full max-h-full p-6 overflow-y-auto">
+          <div className="relative bg-white w-full h-full max-h-full p-6">
             {/* Close Button */}
             <button
               onClick={() => {setIsOpen(!isOpen)}}

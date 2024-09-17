@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { addItem } from '@/components/cart/actions';
+import { addItem, redirectToCheckout } from '@/components/cart/actions';
 import { useProduct } from '@/components/product/product-context';
 import { Product, ProductVariant } from '@/types/shopify';
 import { useFormState } from 'react-dom';
@@ -12,11 +12,13 @@ import Link from 'next/link';
 function SubmitButton({
   availableForSale,
   selectedVariantId, 
-  productHandle
+  productHandle,
+  handleBuyNowClick
 }: {
   availableForSale: boolean;
   selectedVariantId: string | undefined;
-  productHandle: string | null
+  productHandle: string | null;
+  handleBuyNowClick: () => void;
 }) {
   const buttonClasses =
     'relative flex w-full items-center justify-center rounded-full bg-blue-600 p-4 tracking-wide text-white';
@@ -30,64 +32,31 @@ function SubmitButton({
     );
   }
 
-  console.log(selectedVariantId);
   if (!selectedVariantId) {
     return (
-      <Link href={`/product/${productHandle}`}>
-        <Button
-        
-        type="button"
-        className="inline-flex items-center rounded-lg  px-5 py-2.5 "
-      >
-        <svg
-          className="-ms-2 me-2 h-5 w-5"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6"
-          />
-        </svg>
-        Add to cart
+      <Link href={`/product/${productHandle}`} className="flex gap-4">
+        <Button type="button" className="">
+          Add to cart
+        </Button>
+        <Button type="button" className="inline-flex items-center rounded-lg px-5 py-2.5">
+        Buy Now
       </Button>
       </Link>
     );
   }
 
   return (
-    <Button
-    type='submit'
-    className="inline-flex items-center rounded-lg  px-5 py-2.5 "
-  >
-    <svg
-      className="-ms-2 me-2 h-5 w-5"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <path
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6"
-      />
-    </svg>
-    Add to cart
-  </Button>
+    <div className="flex gap-4">
+      <Button type="submit" className="inline-flex items-center rounded-lg px-5 py-2.5">
+        Add to cart
+      </Button>
+      <Button type="button" onClick={handleBuyNowClick} className="inline-flex items-center rounded-lg px-5 py-2.5">
+        Buy Now
+      </Button>
+    </div>
   );
 }
+
 
 export function AddToCart({ product }: { product: Product }) {
   const { variants, availableForSale } = product;
@@ -102,17 +71,27 @@ export function AddToCart({ product }: { product: Product }) {
   const selectedVariantId = variant?.id || defaultVariantId;
   const actionWithVariant = formAction.bind(null, selectedVariantId);
   const finalVariant = variants.find((variant) => variant.id === selectedVariantId)!;
-  const productHandle = product.handle
+  const productHandle = product.handle;
 
+  // Function to handle Buy Now: Adds item to cart and redirects to checkout
+  const handleBuyNowClick = async () => {
+    await addCartItem(finalVariant, product); // Add the item to the cart
+    redirectToCheckout(); // Redirect to checkout after item is added
+  };
 
   return (
     <form
       action={async () => {
-        addCartItem(finalVariant, product);
-        await actionWithVariant();
+        await addCartItem(finalVariant, product); // Add the item to the cart
+        await actionWithVariant(); // Handle form submission if necessary
       }}
     >
-      <SubmitButton availableForSale={availableForSale} selectedVariantId={selectedVariantId} productHandle={productHandle}/>
+      <SubmitButton
+        availableForSale={availableForSale}
+        selectedVariantId={selectedVariantId}
+        productHandle={productHandle}
+        handleBuyNowClick={handleBuyNowClick} // Pass the Buy Now handler
+      />
       <p aria-live="polite" className="sr-only" role="status">
         {message}
       </p>

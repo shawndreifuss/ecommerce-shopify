@@ -1,6 +1,6 @@
 
 import React from "react";
-import  ProductCard  from "@/components/product-card";
+import  ProductCard  from "@/components/product/product-card";
 import { Product } from "@/types/shopify";
 
 

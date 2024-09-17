@@ -1,6 +1,6 @@
 import React from 'react'
 import FilterSidebar from '@/components/filter-sidebar'
-import ProductPagination from '@/components/product-pagination'
+import ProductPagination from '@/components/product/product-pagination'
 import { getProducts } from '@/lib/shopify'
 
 
