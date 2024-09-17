@@ -260,6 +260,12 @@ export type ShopifyProductRecommendationsOperation = {
   };
 };
 
+export interface YouMightAlsoLike {
+  tags: string[];
+  collectionId: string | null;
+  excludeProductId: string;
+}
+
 export type ShopifyProductsOperation = {
   data: {
     products: Connection<ShopifyProduct>;

@@ -14,14 +14,16 @@ import { getCartQuery } from '@/lib/shopify/queries/cart';
 import {
   getCollectionProductsQuery,
   getCollectionQuery,
-  getCollectionsQuery
+  getCollectionsQuery, 
+
 } from '@/lib/shopify/queries/collection';
 import { getMenuQuery } from '@/lib/shopify/queries/menu';
 import { getPageQuery, getPagesQuery } from '@/lib/shopify/queries/page';
 import {
   getProductQuery,
   getProductRecommendationsQuery,
-  getProductsQuery
+  getProductsQuery,
+  getYouMightAlsoLikeQuery
 } from '@/lib/shopify/queries/product';
 import {
   Cart,
@@ -47,7 +49,7 @@ import {
   ShopifyProductRecommendationsOperation,
   ShopifyProductsOperation,
   ShopifyRemoveFromCartOperation,
-  ShopifyUpdateCartOperation
+  ShopifyUpdateCartOperation,
 } from '@/types/shopify';
 
 const domain = process.env.SHOPIFY_STORE_DOMAIN
@@ -453,3 +455,48 @@ export async function revalidate(req: NextRequest): Promise<NextResponse> {
 
   return NextResponse.json({ status: 200, revalidated: true, now: Date.now() });
 }
+
+
+export async function getYouMightAlsoLike({
+  tags,
+  collectionId,
+  excludeProductId
+}: {
+  tags: string[];
+  collectionId: string | null;
+  excludeProductId: string;
+}): Promise<Product[]> {
+  // Build the query string for filtering products
+  let query = '';
+
+  // If there are tags, include them in the query
+  if (tags.length > 0) {
+    const tagQuery = tags.map(tag => `tag:"${tag}"`).join(' OR ');
+    query += `(${tagQuery}) `;
+  }
+
+  // If there is a collectionId, include that in the query
+  if (collectionId) {
+    query += `AND collection_id:"${collectionId}" `;
+  }
+
+  // Exclude the current product by its ID
+  query += `AND NOT id:"${excludeProductId}"`;
+
+  const res = await shopifyFetch<ShopifyProductsOperation>({
+    query: getYouMightAlsoLikeQuery,  // This would be your GraphQL query string
+    tags: [TAGS.products],
+    variables: {
+      query,  // Pass the dynamically built query string
+      reverse: false,
+      sortKey: 'CREATED_AT',  // Sort the products by the creation date or other desired criteria
+    },
+  });
+
+  // Extract nodes from the connection object before reshaping
+  const products = removeEdgesAndNodes(res.body.data.products);
+
+  // Now pass the array of products to reshapeProducts
+  return reshapeProducts(products);
+}
+
