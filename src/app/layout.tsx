@@ -5,9 +5,9 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { getCart } from '@/lib/shopify';
 import { ensureStartsWith } from '@/lib/utils';
 import { cookies } from 'next/headers';
-import { ReactNode } from 'react';
 import { Toaster } from 'sonner';
 import { WelcomeToast } from "@/components/welcome-toast";
+import { CartProvider } from "@/components/cart/cart-context";
 
 const inter = Inter({ subsets: ["greek"] });
 
@@ -47,6 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
+      <CartProvider cartPromise={cart}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -56,6 +57,7 @@ export default function RootLayout({
           {children}
           <Toaster closeButton />
         </ThemeProvider>
+        </CartProvider>
       </body>
     </html>
   );

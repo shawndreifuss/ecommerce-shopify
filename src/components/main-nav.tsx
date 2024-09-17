@@ -1,6 +1,6 @@
 // MainNav.tsx (Server Component)
 import { UserCircle } from 'lucide-react';
-import { ShoppingCart } from '@/components/shopping-cart';
+import { ShoppingCart } from '@/components/cart/shopping-cart';
 import { NavLinks } from '@/components/nav-links';
 import { MobileNav } from '@/components/mobile-nav';
 import Image from 'next/image';
@@ -52,9 +52,10 @@ export const MainNav = async () => {
         <Search />
 
         {/* Icons Section */}
-        <div className="flex align-center justify-between">
-          <NotificationDropdown />
-          <ShoppingCart />
+        <div className="flex align-center justify-evenly gap-4">
+          {/* <NotificationDropdown /> */}
+          <div className="cursor-pointer flex align-center justify-center w-full"> <ShoppingCart  /></div>
+         
 
           {user ? (
             <DropdownMenu>

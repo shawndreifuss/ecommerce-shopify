@@ -7,11 +7,10 @@ import { ProductInfo } from "@/components/product-info";
 import ReviewsSection from "@/components/reviews-section";
 import WhyBuySection from "@/components/why-buy-section";
 import { YouMightAlsoLike } from "@/components/you-might-also-like";
-import { Image } from '@/types/shopify';
-import Link from 'next/link';
-import { Suspense } from 'react';
+
 import { HIDDEN_PRODUCT_TAG } from '@/lib/constants';
 import { getProduct, getProductRecommendations } from '@/lib/shopify';
+import { ProductProvider } from "@/components/product/product-context";
 
 export async function generateMetadata({
   params
@@ -59,16 +58,16 @@ export default async function ProductPage({ params }: { params: { handle: string
 
 
   return (
-    <>
+    <ProductProvider>
 
     <div className="flex flex-col gap-4">
-      <ProductInfo  />
+      <ProductInfo product={product} />
       <YouMightAlsoLike  />
       <AddOnBundle />
       <ReviewsSection />
       <WhyBuySection />
       </div>
-    </>
+    </ProductProvider>
   );
 };
 
