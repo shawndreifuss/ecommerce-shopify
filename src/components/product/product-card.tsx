@@ -73,8 +73,7 @@ export default function ProductGridItems({ product }: { product: Product }) {
   };
 
   const { colors, sizes } = getColorAndSizes(product);
-  const displayedColors = colors.slice(0, 5);
-  const hasMoreColors = colors.length > 5;
+
 
   return (
     <div className="rounded-lg border max-w-96 border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
@@ -92,14 +91,7 @@ export default function ProductGridItems({ product }: { product: Product }) {
       <div className="pt-6">
         <div className="mb-4 flex items-center justify-between gap-4">
         <div className="flex gap-2">
-  {product.tags.map((tag, index) => (
-    <span
-      key={index}
-      className="rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300"
-    >
-      {tag}
-    </span>
-  ))}
+   
 </div>
 
 

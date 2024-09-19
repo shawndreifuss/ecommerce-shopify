@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 // Example Video URL - Replace this with your video URL
 const videoUrl = '/videos/hero-video.mp4';
@@ -23,14 +24,14 @@ const Hero: React.FC = () => {
       {/* Overlay Content */}
       <div className="relative z-10 flex items-center justify-center h-full">
         <div className="text-center text-white">
-          <h1 className="text-5xl font-bold">It’s <span className="font-bold underline">Everything</span> season.</h1>
+          <h1 className="text-5xl font-bold">It’s <span className="font-bold underline">Everything</span> season<span className='text-red-900'>.</span></h1>
           <p className="mt-4 text-lg">
             Shop our new Fall Collections and find your Everything Home.
           </p>
-
+<Link href="/products/all">
           <Button className="mt-6 px-8 py-6 text-lg font-medium bg-background text-gray-900 rounded-full hover:bg-gray-200">
             Shop Now
-          </Button>
+          </Button></Link>
         </div>
       </div>
 
