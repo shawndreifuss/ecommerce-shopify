@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import BestSellerImage from '@/assets/images/best-seller-sofa.jpg'; 
 import SideTableImage from '@/assets/images/side-table.jpg';
 import HomeOfficeImage from '@/assets/images/home-office.jpg';
+import Link from 'next/link';
 
 const BestSellers: React.FC = () => {
   return (
@@ -32,9 +33,11 @@ const BestSellers: React.FC = () => {
           </p>
 
           {/* ShadCN Button */}
-          <Button className="px-8 py-4 bg-white text-gray-900 rounded-full shadow-lg">
+          <Link href='/products/best-sellers'>
+          <Button className="px-8 py-4 bg-white hover:bg-gray-200 text-gray-900 rounded-full shadow-lg">
             Shop Best Sellers
           </Button>
+          </Link>
         </div>
       </div>
     </div>
@@ -60,7 +63,7 @@ const BestSellers: React.FC = () => {
          <div className="text-center text-white px-4">
            <h1 className="text-4xl font-bold mb-4">Always by your side.</h1>
            <p className="text-lg mb-6">Keep the essentials close.</p>
-           <Button className="px-8 py-4 bg-white text-gray-900 rounded-full shadow-lg">
+           <Button className="px-8 py-4 bg-white hover:bg-gray-200 text-gray-900 rounded-full shadow-lg">
              Shop Side Tables
            </Button>
          </div>
@@ -88,7 +91,7 @@ const BestSellers: React.FC = () => {
          <div className="text-center text-white px-4">
            <h1 className="text-4xl font-bold mb-4">Work smarter.</h1>
            <p className="text-lg mb-6">Prioritize comfort and productivity.</p>
-           <Button className="px-8 py-4 bg-white text-gray-900 rounded-full shadow-lg">
+           <Button className="px-8 py-4 bg-white hover:bg-gray-200 text-gray-900 rounded-full shadow-lg">
              Shop Home Office
            </Button>
          </div>

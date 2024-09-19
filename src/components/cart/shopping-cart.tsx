@@ -52,9 +52,9 @@ export function ShoppingCart() {
   return (
     <Sheet>
       <SheetTrigger>
-        <button className="relative w-full h-full flex align-center justify-center">
+        <div className="relative w-full h-full flex align-center justify-center">
           <OpenCart quantity={cart?.totalQuantity} />
-        </button>
+        </div>
       </SheetTrigger>
 
       {/* Full-Screen Modal */}

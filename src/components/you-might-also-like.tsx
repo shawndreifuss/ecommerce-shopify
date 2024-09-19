@@ -8,7 +8,6 @@ import { AddToCart } from './cart/add-to-cart';
 export async function YouMightAlsoLike({ productId }: { productId: string }) {
   const products = await getProductRecommendations(productId);
 
-  console.log(products)
 
   if (!products) return null;
   return (

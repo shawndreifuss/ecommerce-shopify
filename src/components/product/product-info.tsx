@@ -21,25 +21,9 @@ const colorMap: { [key: string]: string } = {
 };
 
 export function ProductInfo({ product }: { product: Product }) {
-  const [selectedVariant, setSelectedVariant] = useState<ProductVariant>(product.variants[0]); // Default to the first variant
-  const [quantity, setQuantity] = useState<number>(1);
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant>(product.variants[0]);
   const [selectedImage, setSelectedImage] = useState(product.images[0]);
 
-  // Extract available color options from the product variants
-  const colorOptions = product.options.find(option => option.name === 'Color')?.values || [];
-
-  // Handle variant selection (color)
-  const handleVariantChange = (color: string) => {
-    const newVariant = product.variants.find(variant =>
-      variant.selectedOptions.some(option => option.name === 'Color' && option.value === color)
-    );
-    if (newVariant) {
-      setSelectedVariant(newVariant);
-    }
-  };
-
-
-  console.log(product);
   return (
    
       <div className="container mx-auto p-8 flex flex-col lg:flex-row gap-8 mt-40 h-full mb-16">

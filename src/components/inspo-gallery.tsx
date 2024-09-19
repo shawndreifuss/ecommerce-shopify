@@ -49,7 +49,7 @@ const InspoGallery: React.FC = () => {
           <div key={product.id} className="relative group">
             <div className="relative w-full h-96">
               <Image
-                src={product.image} // Now it's a StaticImageData
+                src={product.image} 
                 alt={product.name}
                 layout="fill"
                 objectFit="cover"

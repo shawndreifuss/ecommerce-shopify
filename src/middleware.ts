@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-const protectedRoutes = ['/my-account', '/settings', '/admin', '/orders'];
+const protectedRoutes = ['/my-account', '/settings', '/orders'];
 const authRestrictedRoutes = ['/login', '/register'];
 
 export default async function middleware(req: NextRequest): Promise<Response | undefined> {
