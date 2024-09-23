@@ -46,6 +46,7 @@ export default function RootLayout({
   const cart = getCart(cartId);
   return (
     <html lang="en" suppressHydrationWarning>
+      <script src="//code.tidio.co/dbvcf4vch8wwp2153gitsg2zttd6hfgg.js" async></script>
       <body className={inter.className}>
       <CartProvider cartPromise={cart}>
         <ThemeProvider
